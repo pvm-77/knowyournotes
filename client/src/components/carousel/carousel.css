@@ -1,0 +1,54 @@
+.carousel {
+  /* border: 1px solid #ff0000; */
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  max-width: 100%;
+  overflow: hidden;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  border-radius: 4px;
+}
+
+.carousel-container {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+.carousel-item {
+  flex: 0 0 100%;
+}
+.carousel-item img {
+  width: 100%;
+  height: calc(60dvh);
+  object-fit: contain;
+  aspect-ratio: 3/2;
+}
+
+.carousel-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  background-color: #d558c2;
+  border-radius: 20%;
+  display: inline-block;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: #640146;
+}
+.caption {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 22px;
+}

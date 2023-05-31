@@ -1,26 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
-import Slider from './components/slideshow/Slider';
+import Carousel from './components/carousel/Carousel';
+import Button from './components/button/Button';
+import SignUpForm from './components/signupform/SignUpForm';
+import LoginForm from './components/loginform/LoginForm';
+import Home from './components/home/Home';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 function App() {
   return (
-    <div>
-      <Slider/>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <Routes>
+          <Route path='/' element={<Home/>}/>
+          <Route path='/login' element={<LoginForm />} />
+          <Route path='/signup' element={<SignUpForm />} />
+        </Routes>
+
+      </div>
+
+    </Router>
   );
 }
-
 export default App;

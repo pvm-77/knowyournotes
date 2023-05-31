@@ -1,0 +1,124 @@
+
+
+
+
+.login-form {
+    /* display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    margin: 0 auto; */
+  }
+  
+  .input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .input-group input {
+    padding-left: 2.5rem;
+    height: 30px;
+  }
+  
+  .input-group .input-icon {
+    position: absolute;
+    left: 0.5rem;
+  }
+  
+
+.login-form-wrapper{
+    border: 1px solid red;
+    padding: 12px 14px;
+}
+.login-header{
+    border: 1px solid red;
+    display: flex;
+    align-items: center;
+    align-content: center;
+
+}
+.item{
+    display: flex;
+    /* border: 1px solid red; */
+    flex-direction: row;
+    align-items: center;
+    align-content: space-between;
+    text-decoration: none;
+}
+
+.arrow {
+  display: inline-block; /* Ensures the image behaves as an inline element */
+  width: 48px; /* Set the desired width */
+  height: 48px; /* Set the desired height */
+  background-size: cover; /* Adjusts the background image size to cover the element */
+  background-repeat: no-repeat; /* Prevents the background image from repeating */
+  background-position: center; /* Positions the background image at the center */
+}
+
+/* 
+.tooltip {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #000000;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+   */
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #000000;
+  color: #ffffff;
+  text-align: center;
+  border-radius: 4px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 8px;
+  border-style: solid;
+  border-color: transparent transparent #000000 transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
