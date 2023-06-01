@@ -1,59 +1,143 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { arrow } from '../../assets';
 import './loginform.css'
 import Button from '../button/Button';
+import * as Yup from 'yup';
+import { AiOutlineMail, AiOutlineEyeInvisible, AiOutlineEye, AiOutlineLock } from 'react-icons/ai'
+
 const LoginForm = () => {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [showPassword, setShowPassword] = useState(false);
+    const [errors, setErrors] = useState({})
+    const toggle = () => {
+        setShowPassword(!showPassword);
+    }
+    const validationSchema = Yup.object().shape({
+        name: Yup.string().required('Name is required'),
+        email: Yup.string().email('Invalid email').required('Email is required'),
+        password: Yup.string().required('Password is required'),
+    });
+
+    const handleSubmit = async () => {
+        try {
+            await validationSchema.validate({ email, password }, { abortEarly: false });
+        } catch (error) {
+            console.log(error)
+            if (error instanceof Yup.ValidationError) {
+                const validationErrors = {};
+                error.inner.forEach((err) => {
+                    validationErrors[err.path] = err.message
+                });
+                setErrors(validationErrors)
+
+            }
+        }
+
+    }
+    const handleTogglePassword = () => {
+        setShowPassword(!showPassword)
+    }
     return (
-        <div className='login-form-wrapper'>
-            <div className='login-header' >
-                <Link to='/' className='item'>
-                    <img className='arrow' src={arrow} alt='arrow' />
-                </Link>
-                <h3>login</h3>
-
-            </div>
-
-
-            <div>
-                <p><b>welcome back!</b></p>
-                <p>please login with your credentials</p>
-            </div>
-            <form className='login-form'>
-                <div className='input-group'>
-                    <input type='email' id='email' name='email' className='' placeholder='Email Address' />
-                    <svg className='input-icon' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path fill="#640146" d="M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M12,4c4.41,0,8,3.59,8,8s-3.59,8-8,8 s-8-3.59-8-8S7.59,4,12,4z M18,10.59l1.41-1.41l1.42,1.42L19.41,12l1.42,1.41L18,14.83l-1.41-1.42L15.17,14l-1.42-1.41L16.59,12 l-1.42-1.42L18,10.59z M4,12c0-3.31,2.69-6,6-6s6,2.69,6,6s-2.69,6-6,6S4,15.31,4,12z" />
-                    </svg>
-
-
-
+        <div className='signup-form-wrapper'>
+            <div className='signup-form-container'>
+                <div className='signup-form-header' >
+                    <Link to='/' className='item back-arrow-animation'>
+                        <img className='arrow' src={arrow} alt='arrow' />
+                    </Link>
+                    <p className='signup-header-title'><b>login</b></p>
                 </div>
-                <div className='input-group'>
-                    <input type='password' id='password' name='password' className='' placeholder='password' />
-                    <svg className='input-icon' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path fill="#640146" d="M18,8H6V6c0-2.76,2.24-5,5-5s5,2.24,5,5v2h1c0.55,0,1,0.45,1,1v10c0,0.55-0.45,1-1,1H6c-0.55,0-1-0.45-1-1V9 c0-0.55,0.45-1,1-1h12V8z M12,15c0.55,0,1-0.45,1-1v-2c0-0.55-0.45-1-1-1s-1,0.45-1,1v2C11,14.55,11.45,15,12,15z M15,8H9V6 c0-1.65,1.35-3,3-3s3,1.35,3,3V8z" />
-                    </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path fill="#FF0000" d="M12,4c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9S16.97,4,12,4z M12,20c-4.41,0-8-3.59-8-8s3.59-8,8-8 s8,3.59,8,8S16.41,20,12,20z M12,6c-2.21,0-4,1.79-4,4s1.79,4,4,4s4-1.79,4-4S14.21,6,12,6z M12,10c-0.62,0-1.19-0.24-1.63-0.65l1.28-1.28 C11.74,7.61,11.87,7.5,12,7.5s0.26,0.11,0.35,0.35l1.28,1.28C13.19,9.76,12.62,10,12,10z M15.87,9.35C15.88,9.24,16,9.16,16,9 c0-0.22-0.16-0.4-0.35-0.43C15.8,8.53,15.53,8.7,15.42,8.94l-1.28-1.28C13.76,7.13,13.9,7.02,14.03,7.02 s0.27,0.11,0.35,0.35l1.28,1.28C15.8,8.13,15.87,8.26,15.87,8.5C15.87,8.74,15.8,8.87,15.57,9.07L15.87,9.35z M8.65,7.02 C8.77,7.02,8.9,7.13,8.97,7.35l1.28-1.28C10.73,7.11,10.9,7.02,11.13,7.02S11.61,7.13,11.65,7.35l1.28,1.28 C12.89,8.13,12.96,8.26,12.96,8.5c0,0.24-0.07,0.37-0.3,0.57l0.3,0.28c0.18-0.2,0.3-0.38,0.3-0.57c0-0.24-0.07-0.37-0.35-0.43 L12,7.35C11.89,7.11,11.74,7.02,11.52,7.02S11.26,7.13,11.23,7.35L9.95,8.63C9.88,8.83,9.75,8.96,9.57,9.07L9.87,9.35 C10.1,9.16,10.27,9.03,10.5,9.03c0.22,0,0.4,0.16,0.43,0.35C10.67,9.16,10.53,9.24,10.3,9.35l-0.3,0.28 C9.74,9.65,9.57,9.78,9.57,10c0,0.22,0.16,0.4,0.35,0.43l0.3,0.28C9.93,10.61,10.1,10.74,10.3,10.84l-0.3,0.28 C9.97,11.23,9.85,11.41,9.85,11.61c0,0.22,0.16,0.4,0.35,0.43l0.3,0.28C10.27,12.25,10.41,12.36,10.57,12.46L8.52,14.51 C8.24,14.23,8.11,14.1,8,14.1C7.89,14.1,7.76,14.23,7.48,14.51L7.17,14.23C7.44,13.97,7.6,13.87,7.74,13.74l0.3-0.28 C7.93,13.41,8.07,13.28,8.07,13.07c0-0.24-0.07-0.37-0.3-0.57L7.77,12.22C7.8,12.02,7.94,11.89,8.11,11.78l0.3-0.28 C7.95,11.23,7.87,11.1,7.87,10.86C7.87,10.62,7.93,10.49,8.16,10.28l0.3-0.28C8.32,9.93,8.44,9.78,8.65,9.57L8.35,9.3 C8.12,9.49,8,9.62,7.87,9.74l-0.3,0.28C7.63,10.02,7.5,10.15,7.5,10.35C7.5,10.59,7.63,10.72,7.87,10.92l0.3,0.28 C7.61,11.5,7.5,11.67,7.5,11.87c0,0.22,0.16,0.4,0.35,0.43l0.3,0.28c-0.2,0.18-0.38,0.3-0.57,0.3C7.24,12.88,7.11,12.75,7.02,12.52 l1.45-1.45C9.02,11.91,8.89,12,8.74,12c-0.24,0-0.37-0.07-0.57-0.35l-0.28-0.3c-0.18,0.2-0.3,0.38-0.3,0.57 c0,0.24,0.07,0.37,0.35,0.43l0.28,0.3C8.09,12.93,7.96,13.06,7.74,13.17l-0.28,0.3C7.53,13.5,7.41,13.64,7.41,13.83 c0,0.22,0.16,0.4,0.35,0.43l0.28,0.3C7.85,14.57,8.02,14.7,8.22,14.8l0.28,0.3C7.73,15.09,7.61,15.26,7.61,15.46 c0,0.22,0.16,0.4,0.43,0.35C7.85,15.8,7.93,15.73,8.04,15.7l0.28-0.3C8.53,15.76,8.7,15.9,8.9,16.13l1.28-1.28 C10.13,14.26,10,14.15,9.87,14.15z" />
-                    </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path fill="#FF0000" d="M12,5c-5.03,0-9,3.97-9,9s3.97,9,9,9s9-3.97,9-9S17.03,5,12,5z M12,21c-4.97,0-9-4.03-9-9s4.03-9,9-9 s9,4.03,9,9S16.97,21,12,21z M12,7c3.87,0,7,3.13,7,7s-3.13,7-7,7s-7-3.13-7-7S8.13,7,12,7z M11.29,8.71C10.9,8.32,10.28,8.32,9.89,8.71 L8.71,9.89C8.32,10.28,8.32,10.9,8.71,11.29l4.59,4.59C13.1,15.68,13.55,16,14,16s0.9-0.32,1.18-0.88l4.59-4.59 c0.39-0.39,0.39-1.01,0-1.4l-1.18-1.18c-0.39-0.39-1.01-0.39-1.4,0L14,12.11L11.29,9.41C10.9,9.02,10.28,9.02,11.29,8.71z M9,11 c0-1.66,1.34-3,3-3s3,1.34,3,3s-1.34,3-3,3S9,12.66,9,11z" />
-                    </svg>
 
 
-                </div>
                 <div>
-                    <Link>Forgot Password</Link>
+                    <p><b>welcome back!</b></p>
+                    <p className='small-text'>please login with your credentials</p>
                 </div>
-                <div>
-                    <p>
-                        don't have an account yet?
-                    </p>
-                    <Link to='/signup'>creat an account here</Link>
-                </div>
-                <Button btnLabel='login' />
-            </form>
+
+
+                <form className='signup-form'>
+                    {/*                     
+                    <div className='input-group'>
+                        <input
+                            type='text'
+                            value={email}
+                            onChange={({ target }) => setEmail(target.value)}
+                            id='email'
+                            name='email'
+                            className=''
+                            placeholder='Email Address' />
+                        <svg className='input-icon' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path fill="#640146" d="M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M12,4c4.41,0,8,3.59,8,8s-3.59,8-8,8 s-8-3.59-8-8S7.59,4,12,4z M18,10.59l1.41-1.41l1.42,1.42L19.41,12l1.42,1.41L18,14.83l-1.41-1.42L15.17,14l-1.42-1.41L16.59,12 l-1.42-1.42L18,10.59z M4,12c0-3.31,2.69-6,6-6s6,2.69,6,6s-2.69,6-6,6S4,15.31,4,12z" />
+                        </svg>
+
+
+
+                    </div>
+                    <div className='input-group'>
+                        <input
+                            type={showPassword ? 'text' : 'password'}
+                            value={password}
+                            onChange={({ target }) => setPassword(target.value)}
+                            id='password' name='password' 
+                            className='' placeholder='password' />
+                        <svg className='input-icon' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path fill="#640146" d="M18,8H6V6c0-2.76,2.24-5,5-5s5,2.24,5,5v2h1c0.55,0,1,0.45,1,1v10c0,0.55-0.45,1-1,1H6c-0.55,0-1-0.45-1-1V9 c0-0.55,0.45-1,1-1h12V8z M12,15c0.55,0,1-0.45,1-1v-2c0-0.55-0.45-1-1-1s-1,0.45-1,1v2C11,14.55,11.45,15,12,15z M15,8H9V6 c0-1.65,1.35-3,3-3s3,1.35,3,3V8z" />
+                        </svg>
+                        <span onClick={handleTogglePassword}>
+                            {showPassword ? <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="24" height="24">
+                                <ellipse cx="50" cy="50" rx="40" ry="25" fill="white" stroke="#640146" stroke-width="2" />
+                                <circle cx="50" cy="50" r="15" fill="#640146" />
+                                <line x1="20" y1="80" x2="80" y2="20" stroke="#640146" stroke-width="4" />
+                            </svg> : <svg className='eye-icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="24" height="24">
+                                <ellipse cx="50" cy="50" rx="40" ry="25" fill="#640146" stroke="#640146" stroke-width="2" />
+                                <circle cx="50" cy="50" r="15" />
+                            </svg>}
+
+                        </span>
+
+
+
+
+
+
+
+                    </div> */}
+                    <div className='signup-input-group'>
+                        <AiOutlineMail className='input-control-icon' style={{ color: '#640146', width: '24px', height: '24px' }} />
+                        <input onChange={({ target }) => setEmail(target.value)} value={email} type='email' id='email' name='email'
+                            className='input-control'
+                            placeholder={errors.name || 'Email Address'} />
+                    </div>
+                    <div className='signup-input-group'>
+                        <AiOutlineLock className='input-control-icon' style={{ color: '#640146', width: '24px', height: '24px' }} />
+                        <input onChange={({ target }) => setPassword(target.value)}
+                            value={password} type={showPassword ? 'text' : 'password'} id='password' name='password'
+                            className='input-control'
+                            placeholder={errors.name || 'password'} />
+                        <span className='password-visibility' onClick={toggle}>
+                            {showPassword ? <AiOutlineEyeInvisible style={{ width: '24px', height: '24px' }} /> : <AiOutlineEye style={{ width: '24px', height: '24px' }} />}
+
+                        </span>
+
+                    </div>
+
+                    <div className='forgot-password'>
+                        <Link to='/forgotPassword' className='small-text'>Forgot Password</Link>
+                    </div>
+
+                    <div className='account-info'>
+                        <p className='small-text'>don't have an account yet?</p>
+                        <Link className='account-info-link ' to='/signup'>
+                            create an account here
+                        </Link>
+                    </div>
+
+                    <div className='create-account'>
+                        <button type='submit'>login</button>
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }

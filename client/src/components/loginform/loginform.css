@@ -1,6 +1,10 @@
 
 
-
+.login-form-container{
+  border: 1px solid yellow;
+  margin: 1rem 1rem;
+  padding: 1rem 1rem;
+}
 
 .login-form {
     /* display: flex;
@@ -13,12 +17,13 @@
     position: relative;
     display: flex;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
   }
   
   .input-group input {
     padding-left: 2.5rem;
     height: 30px;
+    border: 1px solid green;
   }
   
   .input-group .input-icon {
@@ -26,16 +31,17 @@
     left: 0.5rem;
   }
   
+ 
 
 .login-form-wrapper{
     border: 1px solid red;
-    padding: 12px 14px;
+    /* padding: 12px 14px; */
 }
 .login-header{
     border: 1px solid red;
     display: flex;
-    align-items: center;
-    align-content: center;
+    /* align-items: center; */
+    /* align-content: center; */
 
 }
 .item{
@@ -121,4 +127,27 @@
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
+}
+
+
+@keyframes backArrowAnimation {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.back-arrow-animation {
+  display: inline-block;
+  animation: backArrowAnimation 1s infinite;
+}
+
+.forgot-password{
+  display: flex;
+  flex-direction:row-reverse;
 }
