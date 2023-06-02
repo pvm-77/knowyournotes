@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Button from '../button/Button';
 const Home = () => {
     return (
-        <div>
+        <>
             <Carousel />
             <Link to='/login'>
                 <Button btnLabel='login' />
@@ -13,7 +13,7 @@ const Home = () => {
                 <Button btnLabel='create account' />
             </Link>
 
-        </div>
+        </>
     )
 }
 
