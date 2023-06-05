@@ -6,12 +6,14 @@ const Home = () => {
     return (
         <>
             <Carousel />
+
+{/*             
             <Link to='/login'>
                 <Button btnLabel='login' />
             </Link>
             <Link to='/signup'>
                 <Button btnLabel='create account' />
-            </Link>
+            </Link> */}
 
         </>
     )

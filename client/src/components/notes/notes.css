@@ -1,0 +1,7 @@
+.notes-wrapper{
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: row;
+    padding: 12px 14px;
+    flex-wrap: wrap;
+}

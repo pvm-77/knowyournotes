@@ -1,0 +1,44 @@
+/* Styles for the note card container */
+.note-card {
+    margin: 0.4rem 0.4rem;
+    width: 300px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles for the note content */
+.note-card .note-content {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Styles for the card footer */
+.note-card .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.note-card .card-footer button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.note-card .card-footer button:hover {
+    background-color: #45a049;
+}
+
+.note-card .card-footer .delete-button {
+    background-color: #e53935;
+}
+
+.note-card .card-footer .delete-button:hover {
+    background-color: #c62828;
+}

@@ -44,7 +44,7 @@ const Carousel = () => {
             <div className='carousel-dot'>
                 {
                     carouselImages.map((image, index) => (
-                        <span
+                        <span key={index}
                             className={`dot ${currentCarouselImageIndex === index ? 'active' : ''}`}
                             onClick={() => handleDotClick(index)} ></span>
                     ))
